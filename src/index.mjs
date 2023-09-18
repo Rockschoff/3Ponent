@@ -2,6 +2,7 @@ import "./styles.css";
 import * as THREE from "three"
 import {Editor} from "./editor"
 import  {setControls} from "./setControls"
+import { PropertiesPanel } from "./properties";
 
 
 
@@ -23,8 +24,6 @@ function animate(){
   requestAnimationFrame(animate)
   renderer.render(scene , camera)
 }
-
-
 
 const geometry = new THREE.BoxGeometry(1,1,1)
 const material = new THREE.MeshNormalMaterial()

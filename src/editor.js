@@ -1,4 +1,5 @@
 import Signal from "signals";
+import { PropertiesPanel } from "./properties";
 
 function Editor(scene) {
   // console.log("I am running");
@@ -9,6 +10,11 @@ function Editor(scene) {
   };
   this.objects = [];
   this.currentObject = null;
+  this.propertiesPanel = new PropertiesPanel(this)
+
+
+
+
 
   this.signals.addObject.add(function (mesh, editor) {
     scene.children[0].add(mesh);
@@ -29,5 +35,9 @@ function Editor(scene) {
       editor.currentObject = object;
     }
   });
+
+  this.signals.setCurrentObject.add(function(object, editor){
+    editor.propertiesPanel.updateObject(object?"Object":"Scene")
+  })
 }
 export { Editor };

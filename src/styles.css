@@ -2,3 +2,9 @@ body {
   font-family: sans-serif;
   margin: 0px;
 }
+
+
+.tab{
+  height : 500px;
+  background-color: lavender;
+}

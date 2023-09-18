@@ -11,8 +11,7 @@
   },
   "keywords": [],
   "dependencies": {
-    "signals": "1.0.0",
-    "three": "0.151.3",
-    "three.interaction": "0.2.3"
+    "signals": "^1.0.0",
+    "three": "^0.156.1"
   }
 }
