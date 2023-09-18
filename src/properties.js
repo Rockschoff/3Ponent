@@ -1,24 +1,34 @@
 import * as THREE from "three"
 import "./styles.css"
+import { PropertiesPanelUI } from "../UI/PropertiesPanelUI"
 
 function PropertiesPanel(editor){
 
-
+    panelUI = new PropertiesPanelUI(editor)
     
 
-    console.log(editor)
-    var state = "False"
-    const tab = document.createElement("div")
-    tab.innerText = "Scene"
+    
+    // tab.style.cssText+="position:absolute;top:0px;bottom:0px;color:red;"
     
     
-
-    document.getElementById("properties").appendChild(tab)
+    const propertiesDiv = document.getElementById("properties")
+    propertiesDiv.appendChild(panelUI.dom)
+    propertiesDiv.style.backgroundColor="white"
+    propertiesDiv.style.position = "absolute"
+    propertiesDiv.style.top="0px"
+    propertiesDiv.style.right="0px"
+    propertiesDiv.style.width="30%"
+    propertiesDiv.style.height="100%"
     
-    this.updateObject = function(newName){
+    this.updateObjectPanel = function(newName){
 
-        tab.innerHTML=newName
+        panelUI.heading.innerText = newName
 
+    }
+
+    this.updateObjectTransforms = function(data){
+        
+        panelUI.transforms.updateObjectTransforms(data)
     }
 
 }

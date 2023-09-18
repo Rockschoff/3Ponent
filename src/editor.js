@@ -6,7 +6,8 @@ function Editor(scene) {
   this.signals = {
     addObject: new Signal(),
     removeObject: new Signal(),
-    setCurrentObject: new Signal()
+    setCurrentObject: new Signal(),
+    updateObjectTransforms:new Signal()
   };
   this.objects = [];
   this.currentObject = null;
@@ -37,7 +38,21 @@ function Editor(scene) {
   });
 
   this.signals.setCurrentObject.add(function(object, editor){
-    editor.propertiesPanel.updateObject(object?"Object":"Scene")
+    editor.propertiesPanel.updateObjectPanel(object?"Object":"Scene")
   })
+
+  this.signals.updateObjectTransforms.add(function(position , rotation , scale , editor){
+    // console.log(position , rotation , scale)
+    const data = {
+      position : position,
+      rotation : rotation,
+      scale : scale
+    }
+    editor.propertiesPanel.updateObjectTransforms(data)
+  })
+
+  this.updateObjectProperty = function(name , value){
+    
+  }
 }
 export { Editor };

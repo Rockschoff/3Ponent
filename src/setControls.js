@@ -8,6 +8,13 @@ function setControls(scene, renderer, camera, editor) {
   orbitControls.enabled = false;
   const transformControls = new TransformControls(camera, renderer.domElement);
   scene.add(transformControls);
+  transformControls.addEventListener("change", function(e){
+    const obj = transformControls.object
+    editor.signals.updateObjectTransforms.dispatch(obj.position ,
+       obj.rotation,
+        obj.scale,
+         editor)
+  })
 
   window.addEventListener("keydown", function (e) {
     if (e.key === "Alt") {
