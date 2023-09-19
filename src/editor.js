@@ -1,6 +1,6 @@
 import Signal from "signals";
 import { PropertiesPanel } from "./properties";
-
+import { Menubar } from "./menubar";
 function Editor(scene) {
   // console.log("I am running");
   this.signals = {
@@ -14,6 +14,7 @@ function Editor(scene) {
   this.objects = [];
   this.currentObject = null;
   this.propertiesPanel = new PropertiesPanel(this)
+  this.menubar = new Menubar(this)
 
 
 

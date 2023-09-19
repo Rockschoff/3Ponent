@@ -1,4 +1,3 @@
-import * as THREE from "three"
 import "./styles.css"
 import { PropertiesPanelUI } from "../UI/PropertiesPanelUI"
 
