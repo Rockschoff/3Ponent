@@ -7,6 +7,7 @@ class MenuElement{
         for(var i =0 ; i < options.length ; i++){
             this.options[options[i]]=null
         }
+        this.dropDown=false
 
         this.createElement()
     }
@@ -20,7 +21,7 @@ class MenuElement{
         this.dom.style.backgroundColor="pink"
         this.dom.style.textAlign="center"
         this.dom.style.lineHeight="4vh"
-        this.dom.onclick=this.HandleClick
+        this.dom.onclick=this.HandleDropdown
 
         this.createDropDown()
         
@@ -30,8 +31,8 @@ class MenuElement{
         console.log("creating the dropdown")
     }
 
-    HandleClick(){
-        console.log("clicked")
+    HandleDropdown(){
+        console.log("dropdown")
     }
 }
 
