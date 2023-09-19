@@ -7,7 +7,8 @@ function Editor(scene) {
     addObject: new Signal(),
     removeObject: new Signal(),
     setCurrentObject: new Signal(),
-    updateObjectTransforms:new Signal()
+    updateObjectTransforms:new Signal(),
+    updateObjectProperty:new Signal
   };
   this.objects = [];
   this.currentObject = null;
@@ -38,7 +39,7 @@ function Editor(scene) {
   });
 
   this.signals.setCurrentObject.add(function(object, editor){
-    editor.propertiesPanel.updateObjectPanel(object?"Object":"Scene")
+    editor.propertiesPanel.updateObjectPanel(object?object.name:"Scene")
   })
 
   this.signals.updateObjectTransforms.add(function(position , rotation , scale , editor){
@@ -51,8 +52,17 @@ function Editor(scene) {
     editor.propertiesPanel.updateObjectTransforms(data)
   })
 
-  this.updateObjectProperty = function(name , value){
-    
-  }
+  this.signals.updateObjectProperty.add(function(property , values , editor){
+    console.log("in the editor" , name , values)
+    if(editor.currentObject){
+      editor.currentObject[property].x=values[0]
+      editor.currentObject[property].y=values[1]
+      editor.currentObject[property].z=values[2]
+
+    }
+  })
+
+  
+  
 }
 export { Editor };
