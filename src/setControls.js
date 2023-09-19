@@ -16,6 +16,8 @@ function setControls(scene, renderer, camera, editor) {
          editor)
   })
 
+  
+
   window.addEventListener("keydown", function (e) {
     if (e.key === "Alt") {
       console.log("shift down");
@@ -23,9 +25,16 @@ function setControls(scene, renderer, camera, editor) {
     }
   });
   window.addEventListener("keyup", function (e) {
+    
     if (e.key === "Alt") {
       console.log("shift up");
       orbitControls.enabled = false;
+    }else if(e.key=="s"){
+      editor.signals.updateTransformControls.dispatch("scale" , editor)
+    }else if(e.key=="r"){
+      editor.signals.updateTransformControls.dispatch("rotate" , editor)
+    }else if(e.key=="t"){
+      editor.signals.updateTransformControls.dispatch("translate" , editor)
     }
   });
 
@@ -40,10 +49,10 @@ function setControls(scene, renderer, camera, editor) {
     // console.log(pointer);
     const intersects = raycaster.intersectObjects(scene.children[0].children);
     if (intersects.length > 0) {
-      console.log("mila");
+      
       editor.signals.setCurrentObject.dispatch(intersects[0].object, editor);
     } else {
-      console.log("nahi mila");
+
       editor.signals.setCurrentObject.dispatch(null, editor);
     }
   });

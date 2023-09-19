@@ -8,7 +8,8 @@ function Editor(scene) {
     removeObject: new Signal(),
     setCurrentObject: new Signal(),
     updateObjectTransforms:new Signal(),
-    updateObjectProperty:new Signal
+    updateObjectProperty:new Signal,
+    updateTransformControls: new Signal()
   };
   this.objects = [];
   this.currentObject = null;
@@ -60,6 +61,14 @@ function Editor(scene) {
       editor.currentObject[property].z=values[2]
 
     }
+  })
+
+  this.signals.updateTransformControls.add(function(mode , editor){
+    if(editor.currentObject){
+      const transformControls = scene.children[1];
+      transformControls.setMode(mode)
+    }
+    
   })
 
   
