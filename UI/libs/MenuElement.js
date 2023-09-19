@@ -3,7 +3,10 @@ class MenuElement{
         this.name = name
         this.editor = editor
         this.dom = document.createElement("div")
-        this.options=options
+        this.options={}
+        for(var i =0 ; i < options.length ; i++){
+            this.options[options[i]]=null
+        }
 
         this.createElement()
     }
@@ -19,15 +22,16 @@ class MenuElement{
         this.dom.style.lineHeight="4vh"
         this.dom.onclick=this.HandleClick
 
-        console.log(this.dom.style.height , this.dom.parentElement)
+        this.createDropDown()
         
+    }
+
+    createDropDown(){
+        console.log("creating the dropdown")
     }
 
     HandleClick(){
         console.log("clicked")
-        const dropDown = document.createElement("div")
-
-        dropDown.style.cssText="width:100px;position:relative;"
     }
 }
 
