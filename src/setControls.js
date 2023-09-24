@@ -10,10 +10,14 @@ function setControls(scene, renderer, camera, editor) {
   scene.add(transformControls);
   transformControls.addEventListener("change", function(e){
     const obj = transformControls.object
-    editor.signals.updateObjectTransforms.dispatch(obj.position ,
-       obj.rotation,
-        obj.scale,
-         editor)
+    if(obj){
+      editor.signals.updateObjectTransforms.dispatch(obj.position ,
+        obj.rotation,
+         obj.scale,
+          editor)
+
+    }
+    
   })
 
   
@@ -49,10 +53,10 @@ function setControls(scene, renderer, camera, editor) {
     // console.log(pointer);
     const intersects = raycaster.intersectObjects(scene.children[0].children);
     if (intersects.length > 0) {
-      
+      // console.log(intersects[0].object)
       editor.signals.setCurrentObject.dispatch(intersects[0].object, editor);
     } else {
-
+      // console.log("nothing at the tracer")
       editor.signals.setCurrentObject.dispatch(null, editor);
     }
   });

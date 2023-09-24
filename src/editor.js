@@ -1,6 +1,7 @@
 import Signal from "signals";
 import { PropertiesPanel } from "./properties";
 import { Menubar } from "./menubar";
+import getThreeObject from "../helpers/getThreeObject";
 function Editor(scene) {
   // console.log("I am running");
   this.signals = {
@@ -20,13 +21,25 @@ function Editor(scene) {
 
 
 
-  this.signals.addObject.add(function (mesh, editor) {
-    scene.children[0].add(mesh);
+  this.signals.addObject.add(function (mesh=null, editor , name=null ) {
+    if(mesh){
+      scene.children[0].add(mesh);
+      editor.objects.push(mesh)
+    }else if(name){
+      console.log("adding the object" , name)
+      const mesh =  getThreeObject(name)
+      if(mesh){
+        scene.children[0].add(mesh)
+        editor.objects.push(mesh)
+      }
+    }
+    // console.log(editor.objects)
+    
   });
-  this.signals.addObject.add(function (mesh, editor) {
-    editor.objects.push(mesh);
-    console.log(editor.objects);
-  });
+  // this.signals.addObject.add(function (mesh=null, editor , name=null) {
+  //   editor.objects.push(mesh);
+  //   console.log(editor.objects);
+  // });
 
   this.signals.setCurrentObject.add(function (object, editor) {
     const transformControls = scene.children[1];
@@ -38,6 +51,7 @@ function Editor(scene) {
       transformControls.detach();
       editor.currentObject = object;
     }
+    // console.log(editor.currentObject)
   });
 
   this.signals.setCurrentObject.add(function(object, editor){
@@ -55,7 +69,7 @@ function Editor(scene) {
   })
 
   this.signals.updateObjectProperty.add(function(property , values , editor){
-    console.log("in the editor" , name , values)
+    
     if(editor.currentObject){
       editor.currentObject[property].x=values[0]
       editor.currentObject[property].y=values[1]
@@ -70,9 +84,6 @@ function Editor(scene) {
       transformControls.setMode(mode)
     }
     
-  })
-
-  
-  
+  }) 
 }
 export { Editor };
