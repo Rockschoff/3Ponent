@@ -2,6 +2,7 @@ import Signal from "signals";
 import { PropertiesPanel } from "./properties";
 import { Menubar } from "./menubar";
 import getThreeObject from "../helpers/getThreeObject";
+import getThreeMaterial from "../helpers/getThreeMaterial";
 function Editor(scene) {
   // console.log("I am running");
   this.signals = {
@@ -12,6 +13,7 @@ function Editor(scene) {
     updateObjectProperty:new Signal(),
     updateTransformControls: new Signal(),
     addNewMaterial:new Signal(),
+    setMaterial:new Signal()
     
   };
   this.objects = [];
@@ -88,5 +90,13 @@ function Editor(scene) {
     }
     
   }) 
+
+  this.signals.setMaterial.add(function(name, editor){
+    const material = getThreeMaterial(name)
+    if(editor.currentObject){
+      editor.currentObject.material=material
+      
+    }
+  })
 }
 export { Editor };

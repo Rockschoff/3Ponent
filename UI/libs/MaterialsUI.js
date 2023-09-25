@@ -1,4 +1,5 @@
-
+import { MeshBasicMaterial } from "three"
+import materialList from "./materialList"
 class MaterialsUI{
     constructor(editor){
         this.editor = editor
@@ -8,7 +9,7 @@ class MaterialsUI{
             this.name = this.editor.currentObject.material.type
         }
         this.createTemplate()
-        
+        this.openOptions=false
 
     }
     createTemplate(){
@@ -28,11 +29,48 @@ class MaterialsUI{
         name.onmouseleave=function(event){
             name.style.backgroundColor="lavender"
         }
+        
+        //defining the material selector
+        const instance=this
+        const materialOptions = document.createElement("div")
+        const optionsList = document.createElement("ul")
+        function setMaterial(event){
+            name.innerText=event.target.innerText
+            instance.name=event.target.innerText
+            instance.editor.signals.setMaterial.dispatch(event.target.innerText , instance.editor)
+        }
+        for(var i=0;i < materialList.length ; i++){
+            const element = document.createElement("li")
+            element.innerText=materialList[i]
+            element.onclick=setMaterial
+            // console.log(materialList[i])
+            optionsList.appendChild(element)
+        }
+        materialOptions.appendChild(optionsList)
+        materialOptions.style.transition="500ms"
+        materialOptions.style.height="0px"
+        materialOptions.style.overflow="hidden"
+        optionsList.style.listStyle="none"
+        
+        name.onclick=function(event){
+            if(instance.openOptions){
+                materialOptions.style.height="0px"
+                instance.openOptions=false
+            }else{
+                instance.openOptions=true
+                materialOptions.style.height="auto"
+            }
+            
+        }
 
-        const materailList = document.createElement("div")
-        const matlist=""
+
+
+
+
+        
        
         this.materialSelector.appendChild(name)
+        this.materialSelector.appendChild(materialOptions)
 
 
 
