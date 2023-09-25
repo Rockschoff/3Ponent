@@ -9,10 +9,13 @@ function Editor(scene) {
     removeObject: new Signal(),
     setCurrentObject: new Signal(),
     updateObjectTransforms:new Signal(),
-    updateObjectProperty:new Signal,
-    updateTransformControls: new Signal()
+    updateObjectProperty:new Signal(),
+    updateTransformControls: new Signal(),
+    addNewMaterial:new Signal(),
+    
   };
   this.objects = [];
+  this.materials=[]
   this.currentObject = null;
   this.propertiesPanel = new PropertiesPanel(this)
   this.menubar = new Menubar(this)
@@ -55,7 +58,7 @@ function Editor(scene) {
   });
 
   this.signals.setCurrentObject.add(function(object, editor){
-    editor.propertiesPanel.updateObjectPanel(object?object.name:"Scene")
+    editor.propertiesPanel.updateObjectPanel(object?`${object.name}-${object.uuid.slice(0,5)}`:"Scene")
   })
 
   this.signals.updateObjectTransforms.add(function(position , rotation , scale , editor){

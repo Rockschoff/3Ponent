@@ -22,12 +22,22 @@ function PropertiesPanel(editor){
     this.updateObjectPanel = function(newName){
 
         panelUI.heading.innerText = newName
+        if(newName=="Scene"){
+            panelUI.transforms.dom.style.display="none"
+        }else{
+            panelUI.transforms.dom.style.display="block"
+        }
+
+        //update the materials
+        console.log("here")
+        panelUI.materials.updateObjectMaterial()
 
     }
 
     this.updateObjectTransforms = function(data){
         
         panelUI.transforms.updateObjectTransforms(data)
+        
     }
 
 }
