@@ -21,8 +21,7 @@ export default function getThreeMaterial(name){
             return new THREE.MeshStandardMaterial()
         case "MeshToonMaterial":
             return  new THREE.MeshToonMaterial()
-        case "MeshDistanceMaterial":
-            return new THREE.MeshDistanceMaterial()
+       
         default:
             return new THREE.MeshBasicMaterial()
             

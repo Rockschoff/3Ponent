@@ -1,5 +1,6 @@
 import { TransformControlsUI } from "./libs/TransformsUI"
 import { MaterialsUI } from "./libs/MaterialsUI"
+import { PointLight } from "three"
 function PropertiesPanelUI(editor){
 
     this.dom = document.createElement("div")
@@ -47,8 +48,9 @@ function PropertiesPanelUI(editor){
         rotationTransforms.updateValues([rotation.x , rotation.y , rotation.z])
         scaleTransforms.updateValues([scale.x , scale.y , scale.z])
     }
-    this.materials.updateObjectMaterial=function(){
-        materialsPanel.updateObject()
+    this.materials.updateObjectMaterial=function(newName){
+        materialsPanel.updateObject(newName)
+        
     }
     
 

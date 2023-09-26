@@ -24,13 +24,17 @@ function PropertiesPanel(editor){
         panelUI.heading.innerText = newName
         if(newName=="Scene"){
             panelUI.transforms.dom.style.display="none"
+            panelUI.materials.dom.style.display="none"
         }else{
             panelUI.transforms.dom.style.display="block"
+            if(!newName.includes("PointLight"))
+            panelUI.materials.dom.style.display="block"
         }
 
         //update the materials
-        console.log("here")
-        panelUI.materials.updateObjectMaterial()
+        // console.log("here")
+
+        panelUI.materials.updateObjectMaterial(newName)
 
     }
 

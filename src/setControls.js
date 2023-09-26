@@ -53,8 +53,15 @@ function setControls(scene, renderer, camera, editor) {
     // console.log(pointer);
     const intersects = raycaster.intersectObjects(scene.children[0].children);
     if (intersects.length > 0) {
-      // console.log(intersects[0].object)
-      editor.signals.setCurrentObject.dispatch(intersects[0].object, editor);
+      // console.log(intersects)
+      var selectedObject=null
+      if(intersects[0].object.type=="PointLightHelper"){
+        // console.log("helper")
+        selectedObject=intersects[0].object.light
+      }else{
+        selectedObject=intersects[0].object
+      }
+      editor.signals.setCurrentObject.dispatch(selectedObject, editor);
     } else {
       // console.log("nothing at the tracer")
       editor.signals.setCurrentObject.dispatch(null, editor);

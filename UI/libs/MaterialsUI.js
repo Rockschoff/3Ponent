@@ -77,9 +77,13 @@ class MaterialsUI{
     }
 
     updateObject(){
-        if (this.editor.currentObject){
+        console.log(this.editor.currentObject,this.editor.currentObject.material)
+        if (this.editor.currentObject && this.editor.currentObject.material){
+            this.dom.style.display="block"
             this.name = this.editor.currentObject.material.type
             this.materialSelector.childNodes[0].innerText=this.name
+        }else{
+            this.dom.style.display="none"
         }
         
     }

@@ -3,6 +3,7 @@ import { PropertiesPanel } from "./properties";
 import { Menubar } from "./menubar";
 import getThreeObject from "../helpers/getThreeObject";
 import getThreeMaterial from "../helpers/getThreeMaterial";
+import {getThreeLight , getThreeLightHelper} from "../helpers/getThreeLight"
 function Editor(scene) {
   // console.log("I am running");
   this.signals = {
@@ -13,10 +14,13 @@ function Editor(scene) {
     updateObjectProperty:new Signal(),
     updateTransformControls: new Signal(),
     addNewMaterial:new Signal(),
-    setMaterial:new Signal()
+    setMaterial:new Signal(),
+    addLights : new Signal(),
+
     
   };
   this.objects = [];
+  this.lights=[];
   this.materials=[]
   this.currentObject = null;
   this.propertiesPanel = new PropertiesPanel(this)
@@ -60,7 +64,7 @@ function Editor(scene) {
   });
 
   this.signals.setCurrentObject.add(function(object, editor){
-    editor.propertiesPanel.updateObjectPanel(object?`${object.name}-${object.uuid.slice(0,5)}`:"Scene")
+    editor.propertiesPanel.updateObjectPanel(object?`${object.type}-${object.uuid.slice(0,5)}`:"Scene")
   })
 
   this.signals.updateObjectTransforms.add(function(position , rotation , scale , editor){
@@ -97,6 +101,15 @@ function Editor(scene) {
       editor.currentObject.material=material
       
     }
+  })
+
+  this.signals.addLights.add(function(name , editor){
+    const light = getThreeLight(name)
+    scene.children[0].add(light)
+    editor.objects.push(light)
+    
+
+
   })
 }
 export { Editor };

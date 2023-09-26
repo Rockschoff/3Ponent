@@ -32,7 +32,7 @@ class MenuElement{
     }
 
     createDropDown(){
-        console.log("creating the dropdown")
+        // console.log("creating the dropdown")
         const dropdown = document.createElement("div")
         this.dom.appendChild(dropdown)
         this.dropDown=dropdown
@@ -41,7 +41,7 @@ class MenuElement{
     }
 
     HandleDropdown(instance){
-        console.log("here")
+        // console.log("here")
         if(this.isActive){
             instance.dropDown.style.display="none"
             instance.isActive=false
@@ -52,7 +52,7 @@ class MenuElement{
         }
     }
     CloseDropdown(instance){
-        console.log("closing")
+        // console.log("closing")
         instance.dropDown.style.display="none"
         instance.isActive=false
     }

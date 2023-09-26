@@ -29,10 +29,13 @@ const geometry = new THREE.BoxGeometry(1,1,1)
 const material = new THREE.MeshNormalMaterial()
 const box = new THREE.Mesh(geometry , material)
 box.name = "box"
+const ambientLight = new THREE.AmbientLight(0xffffff)
+
 
 
 
 editor.signals.addObject.dispatch(box , editor)
+editor.signals.addObject.dispatch(ambientLight , editor)
 
 setControls(scene , renderer , camera , editor)
 const [segments , division] = [10 , 10]
